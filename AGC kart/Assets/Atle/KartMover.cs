@@ -13,7 +13,7 @@ public class KartMover : MonoBehaviour
     [SerializeField] float maxForwardSpeed = 20f;
     [SerializeField] float maxBackwardsSpeed = 10f;
     [SerializeField] float forwardsAcceleration = 10f;
-    [SerializeField] float backwardsAcceleration = 5f;
+    [SerializeField] float backwardsAcceleration = 20f;
     [SerializeField] float forwardsStartSpeed = 1f;
     [SerializeField] float backwardsStartSpeed = 1f;
 
@@ -70,7 +70,7 @@ public class KartMover : MonoBehaviour
         float startSpeed = isDrivingForwards ? forwardsStartSpeed : backwardsStartSpeed;
 
         // Equation to find the inclination of the sigmoid curve, for it to cross the y-axis at the given start speed value
-        float inclination = (1 / acc) * Mathf.Log(maxSpeed - startSpeed) - Mathf.Log(startSpeed);
+        float inclination = (Mathf.Log((maxSpeed - startSpeed) / startSpeed) / acc);
 
         // Returns the value of the sigmoid function from the given x-value
         return (maxSpeed / (1 + Mathf.Exp((float)-inclination * (xPos - acc))));
