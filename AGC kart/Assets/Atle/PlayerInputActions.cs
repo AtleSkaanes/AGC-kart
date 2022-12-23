@@ -44,6 +44,15 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Reverse"",
+                    ""type"": ""Button"",
+                    ""id"": ""93029766-e7f5-4f44-a626-d55379065c9d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -134,6 +143,28 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""action"": ""Turning"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4296e1e7-4e55-4cff-8838-e0b67d035205"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Reverse"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5e034c85-1905-4017-9e09-6ebf7c9214bc"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Reverse"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -144,6 +175,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Drive = m_Player.FindAction("Drive", throwIfNotFound: true);
         m_Player_Turning = m_Player.FindAction("Turning", throwIfNotFound: true);
+        m_Player_Reverse = m_Player.FindAction("Reverse", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -205,12 +237,14 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
     private IPlayerActions m_PlayerActionsCallbackInterface;
     private readonly InputAction m_Player_Drive;
     private readonly InputAction m_Player_Turning;
+    private readonly InputAction m_Player_Reverse;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
         public PlayerActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @Drive => m_Wrapper.m_Player_Drive;
         public InputAction @Turning => m_Wrapper.m_Player_Turning;
+        public InputAction @Reverse => m_Wrapper.m_Player_Reverse;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -226,6 +260,9 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @Turning.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTurning;
                 @Turning.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTurning;
                 @Turning.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTurning;
+                @Reverse.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnReverse;
+                @Reverse.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnReverse;
+                @Reverse.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnReverse;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -236,6 +273,9 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @Turning.started += instance.OnTurning;
                 @Turning.performed += instance.OnTurning;
                 @Turning.canceled += instance.OnTurning;
+                @Reverse.started += instance.OnReverse;
+                @Reverse.performed += instance.OnReverse;
+                @Reverse.canceled += instance.OnReverse;
             }
         }
     }
@@ -244,5 +284,6 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
     {
         void OnDrive(InputAction.CallbackContext context);
         void OnTurning(InputAction.CallbackContext context);
+        void OnReverse(InputAction.CallbackContext context);
     }
 }

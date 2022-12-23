@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,6 +24,7 @@ public class KartMover : MonoBehaviour
     public PlayerInputActions playerInput;
 
     InputAction drive;
+    InputAction reverse;
     InputAction turn;
 
 
@@ -38,6 +40,9 @@ public class KartMover : MonoBehaviour
         drive.Enable();
         //drive.performed += CalculateSpeed;
 
+        reverse = playerInput.Player.Reverse;
+        reverse.Enable();
+
         turn = playerInput.Player.Turning;
         turn.Enable();
 
@@ -46,21 +51,27 @@ public class KartMover : MonoBehaviour
     private void OnDisable()
     {
         drive.Disable();
+        reverse.Disable();
         turn.Disable();
     }
 
 
     void Update()
     {
-        if (SigmoidCurvePosition > Mathf.Epsilon && !drive.IsPressed()) { SigmoidCurvePosition -= 1 * Time.deltaTime; }
+        if (SigmoidCurvePosition > Mathf.Epsilon && !drive.IsPressed()) 
+            SigmoidCurvePosition -= 1 * Time.deltaTime;
 
-        if (drive.IsPressed()) { CalculateSpeed(); }
+        if (drive.IsPressed()) 
+            CalculateSpeed(true);
+
+        if (reverse.IsPressed())
+            CalculateSpeed(false);
     }
 
-    void CalculateSpeed()
+    void CalculateSpeed(bool isDrivingForwards)
     {
         SigmoidCurvePosition += 1 * Time.deltaTime;
-        currentSpeed = CalculateSigmoidcurve(SigmoidCurvePosition, true);
+        currentSpeed = CalculateSigmoidcurve(SigmoidCurvePosition, isDrivingForwards);
     }
 
     float CalculateSigmoidcurve(float xPos, bool isDrivingForwards)
@@ -69,7 +80,7 @@ public class KartMover : MonoBehaviour
         float maxSpeed = isDrivingForwards ? maxForwardSpeed : maxBackwardsSpeed;
         float startSpeed = isDrivingForwards ? forwardsStartSpeed : backwardsStartSpeed;
 
-        // Equation to find the inclination of the sigmoid curve, for it to cross the y-axis at the given start speed value
+        // Equation to find the inclination of the sigmoid curve wher it cross' the y-axis at the given start-speed value
         float inclination = (Mathf.Log((maxSpeed - startSpeed) / startSpeed) / acc);
 
         // Returns the value of the sigmoid function from the given x-value
