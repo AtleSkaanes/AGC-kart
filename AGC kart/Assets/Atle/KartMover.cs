@@ -17,9 +17,15 @@ public class KartMover : MonoBehaviour
     [SerializeField] float backwardsAcceleration = 20f;
     [SerializeField] float forwardsStartSpeed = 1f;
     [SerializeField] float backwardsStartSpeed = 1f;
+    [SerializeField] float turnSpeed = 50f;
 
     //  Sigmoid curve
+    [Header("secret stats")]
     [SerializeField] float SigmoidCurvePosition = 0f;
+
+    bool prevDirection;
+
+    Rigidbody rb;
 
     public PlayerInputActions playerInput;
 
@@ -30,6 +36,7 @@ public class KartMover : MonoBehaviour
 
     void Awake()
     {
+        rb = GetComponent<Rigidbody>();
         playerInput = new PlayerInputActions();
     }
 
@@ -58,20 +65,38 @@ public class KartMover : MonoBehaviour
 
     void Update()
     {
-        if (SigmoidCurvePosition > Mathf.Epsilon && !drive.IsPressed()) 
+        if (SigmoidCurvePosition > Mathf.Epsilon && !drive.IsPressed() && !reverse.IsPressed()) 
             SigmoidCurvePosition -= 1 * Time.deltaTime;
 
-        if (drive.IsPressed()) 
+        if (drive.IsPressed())
+        {
             CalculateSpeed(true);
-
+            rb.AddRelativeForce(new Vector3(-currentSpeed, 0, 0));
+        }
         if (reverse.IsPressed())
+        {
             CalculateSpeed(false);
+            rb.AddRelativeForce(new Vector3(currentSpeed, 0, 0));
+        }
+
+        if (MathF.Abs(rb.velocity.magnitude) > Mathf.Epsilon && turn.IsPressed())
+        {
+            rb.AddTorque(new Vector3(0, turn.ReadValue<Vector2>().x * turnSpeed, 0));
+        }
+
+        Debug.Log("can turn = " + (MathF.Abs(rb.velocity.magnitude) > Mathf.Epsilon));
+
     }
 
     void CalculateSpeed(bool isDrivingForwards)
     {
+        if (prevDirection != isDrivingForwards)
+            SigmoidCurvePosition = 0;
+
         SigmoidCurvePosition += 1 * Time.deltaTime;
         currentSpeed = CalculateSigmoidcurve(SigmoidCurvePosition, isDrivingForwards);
+
+        prevDirection = isDrivingForwards;
     }
 
     float CalculateSigmoidcurve(float xPos, bool isDrivingForwards)
