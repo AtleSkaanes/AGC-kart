@@ -30,91 +30,93 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 {
                     ""name"": ""Drive"",
                     ""type"": ""Button"",
-                    ""id"": ""f8d252b2-f957-4081-99b6-98dde95f02c4"",
+                    ""id"": ""0f5e38d4-3425-4b0c-aea7-466456e852ec"",
                     ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Turning"",
-                    ""type"": ""Value"",
-                    ""id"": ""4212a62c-8773-43df-aa45-6a279e65c975"",
-                    ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""Reverse"",
+                    ""name"": ""Turning"",
                     ""type"": ""Button"",
-                    ""id"": ""93029766-e7f5-4f44-a626-d55379065c9d"",
+                    ""id"": ""4212a62c-8773-43df-aa45-6a279e65c975"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
-                    ""initialStateCheck"": false
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
                 {
-                    ""name"": """",
-                    ""id"": ""c2200f48-b334-418d-9d1e-6a3009aafd51"",
-                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""name"": ""Keyboard"",
+                    ""id"": ""8da13189-9734-4d59-a774-351516c7d152"",
+                    ""path"": ""1DAxis"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Drive"",
-                    ""isComposite"": false,
+                    ""isComposite"": true,
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": """",
-                    ""id"": ""7b3a9371-0733-44c4-8367-c2d7e6293a8e"",
+                    ""name"": ""Positive"",
+                    ""id"": ""83dca8f4-eca1-4565-9ba7-db5fd8a786e2"",
                     ""path"": ""<Keyboard>/w"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Drive"",
                     ""isComposite"": false,
-                    ""isPartOfComposite"": false
+                    ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": ""Gamepad"",
-                    ""id"": ""40bf2785-728e-4fdf-9038-3adb9ce836b4"",
-                    ""path"": ""2DVector"",
+                    ""name"": ""Negative"",
+                    ""id"": ""88d5ba3b-ada9-4a37-adbd-004091cf19b4"",
+                    ""path"": ""<Keyboard>/s"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Turning"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""left"",
-                    ""id"": ""b72f70a6-5fa7-4adf-a39b-869b52637764"",
-                    ""path"": ""<Gamepad>/leftStick/down"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Turning"",
+                    ""action"": ""Drive"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": ""right"",
-                    ""id"": ""55305785-232b-4a23-b27a-7695efe2fa81"",
-                    ""path"": ""<Gamepad>/leftStick/right"",
+                    ""name"": ""Controller"",
+                    ""id"": ""5fd54f5a-de42-4d3a-a499-0c6b24361b06"",
+                    ""path"": ""1DAxis"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Turning"",
+                    ""action"": ""Drive"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""96880ce4-e6fc-422b-b0df-146c4ef7cb3e"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Drive"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""9a0eecdb-71d3-4ff7-9547-f85de79008ed"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Drive"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
                 {
                     ""name"": ""Keyboard"",
-                    ""id"": ""75d5e9aa-c9f4-4af5-b079-17a98f03ee70"",
-                    ""path"": ""2DVector"",
+                    ""id"": ""f4c924d0-fb2d-4e30-8525-73845a3945de"",
+                    ""path"": ""1DAxis"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -123,19 +125,8 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": ""left"",
-                    ""id"": ""3ec752e8-fac3-4df7-9afe-67902953199b"",
-                    ""path"": ""<Keyboard>/a"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Turning"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""right"",
-                    ""id"": ""0f4b09a9-75b1-4583-b63d-ccaf1a22609c"",
+                    ""name"": ""positive"",
+                    ""id"": ""25e414c4-dab1-43b5-8194-c6fcf38a267f"",
                     ""path"": ""<Keyboard>/d"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -145,26 +136,48 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": """",
-                    ""id"": ""4296e1e7-4e55-4cff-8838-e0b67d035205"",
-                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""name"": ""negative"",
+                    ""id"": ""28b60508-1f04-4509-a69c-c787f498ec4c"",
+                    ""path"": ""<Keyboard>/a"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Reverse"",
+                    ""action"": ""Turning"",
                     ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""75303fb3-b06c-42ad-90d9-25d8caeef47e"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Turning"",
+                    ""isComposite"": true,
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": """",
-                    ""id"": ""5e034c85-1905-4017-9e09-6ebf7c9214bc"",
-                    ""path"": ""<Keyboard>/s"",
+                    ""name"": ""positive"",
+                    ""id"": ""e528926f-34b6-4f26-84bf-3579eeef2dd4"",
+                    ""path"": ""<Gamepad>/leftStick/right"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Reverse"",
+                    ""action"": ""Turning"",
                     ""isComposite"": false,
-                    ""isPartOfComposite"": false
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""de14eb92-dabb-44b5-8fb3-6586c9ac3250"",
+                    ""path"": ""<Gamepad>/leftStick/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Turning"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -175,7 +188,6 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Drive = m_Player.FindAction("Drive", throwIfNotFound: true);
         m_Player_Turning = m_Player.FindAction("Turning", throwIfNotFound: true);
-        m_Player_Reverse = m_Player.FindAction("Reverse", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -237,14 +249,12 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
     private IPlayerActions m_PlayerActionsCallbackInterface;
     private readonly InputAction m_Player_Drive;
     private readonly InputAction m_Player_Turning;
-    private readonly InputAction m_Player_Reverse;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
         public PlayerActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @Drive => m_Wrapper.m_Player_Drive;
         public InputAction @Turning => m_Wrapper.m_Player_Turning;
-        public InputAction @Reverse => m_Wrapper.m_Player_Reverse;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -260,9 +270,6 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @Turning.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTurning;
                 @Turning.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTurning;
                 @Turning.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTurning;
-                @Reverse.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnReverse;
-                @Reverse.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnReverse;
-                @Reverse.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnReverse;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -273,9 +280,6 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @Turning.started += instance.OnTurning;
                 @Turning.performed += instance.OnTurning;
                 @Turning.canceled += instance.OnTurning;
-                @Reverse.started += instance.OnReverse;
-                @Reverse.performed += instance.OnReverse;
-                @Reverse.canceled += instance.OnReverse;
             }
         }
     }
@@ -284,6 +288,5 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
     {
         void OnDrive(InputAction.CallbackContext context);
         void OnTurning(InputAction.CallbackContext context);
-        void OnReverse(InputAction.CallbackContext context);
     }
 }
