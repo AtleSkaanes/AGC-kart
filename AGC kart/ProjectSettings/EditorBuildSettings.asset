@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Atle/Atle.unity
+    guid: 5392cbddf0c4f6643af2100f46a72f50
   m_configObjects: {}
