@@ -1,8 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UIElements;
 
 public class KartMover : MonoBehaviour
 {
@@ -10,15 +12,18 @@ public class KartMover : MonoBehaviour
     [SerializeField] float currentSpeed;
     [SerializeField] Quaternion currentRotation;
 
-    [Header("stats")]
-    [SerializeField] float maxForwardSpeed = 20f;
-    [SerializeField] float maxBackwardsSpeed = 10f;
-    [SerializeField] float forwardsAcceleration = 10f;
-    [SerializeField] float backwardsAcceleration = 20f;
-    [SerializeField] float forwardsStartSpeed = 1f;
-    [SerializeField] float backwardsStartSpeed = 1f;
+    [Header("\t---STATS---")]
+    [Header("Speeds")]
+    [SerializeField] float maxForwardSpeed = 2f;
+    [SerializeField] float maxBackwardsSpeed = 1f;
+    [SerializeField] float minSpeed = 0.1f;
+    [Header("Acceleration")]
+    [SerializeField] float forwardsAcceleration = 0.4f;
+    [SerializeField] float backwardsAcceleration = 0.5f;
     [SerializeField] float turnSpeed = 50f;
+    [SerializeField] float drag = 0.2f;
 
+    
   //  Sigmoid curve
   //  [Header("secret stats")]
   //  [SerializeField] float SigmoidCurvePosition = 0f;
@@ -31,7 +36,6 @@ public class KartMover : MonoBehaviour
     float verticalInput;
     float horizontalInput;
 
-
     void Awake()
     {
         playerInput = new PlayerInputActions();
@@ -42,6 +46,7 @@ public class KartMover : MonoBehaviour
     {
         ReadInputs();
         Drive();
+
     }
 
     void ReadInputs ()
@@ -52,7 +57,26 @@ public class KartMover : MonoBehaviour
 
     void Drive ()
     {
-        transform.position += transform.rotation * new Vector3(horizontalInput, 0, verticalInput).normalized;
+        switch (verticalInput)
+        {
+            case 1:
+                currentSpeed += forwardsAcceleration;
+                break;
+
+            case -1:
+                currentSpeed -= backwardsAcceleration;
+                break;
+
+            default:
+                currentSpeed = Mathf.Lerp(currentSpeed, 0, drag);
+
+                if (MathF.Abs(currentSpeed) < minSpeed)
+                    currentSpeed = 0;
+                break;
+        }
+        currentSpeed = Mathf.Clamp(currentSpeed, -maxBackwardsSpeed, maxForwardSpeed);
+
+        transform.position += transform.rotation * new Vector3(0, 0, currentSpeed);
     }
 
     //float CalculateSigmoidcurve(float xPos, bool isDrivingForwards)
